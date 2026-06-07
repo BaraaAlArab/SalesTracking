@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalesTracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <script src="./backend/script.js" defer></script>
+    <script src="./theme/theme.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="./assets/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" type="button" aria-label="Toggle theme">Dark Mode</button>
+    </header>
+        <div class="Calculation">
+        <h1>Calculation</h1>
+        <!-- this is a simple calculation page only to know the daily sales-->
+         <div class="input-container">
+                <label for="morningSales">Morning sales:</label>
+                <input type="number" id="morningSales" placeholder="Enter morning sales">
+
+                <label for="nightSales">Night Sales:</label>
+                <input type="number" id="nightSales" placeholder="Enter night sales">
+                
+                <label for="dailySales">Daily Sales Target (Optional):</label>
+                <input type="number" id="dailySales" placeholder="Enter daily sales target">
+                <section style="display: flex; gap: 10px; align-items: center;">
+                    <label for="operation">commission:</label>
+                    <select id="Commission">
+                        <option value="10%">10%</option>
+                        <option value="15%">15%</option>
+                        <option value="20%">20%</option>
+                    </select>
+                <!-- Use a single place for the result -->
+                <p id="MorningResult" style="font-weight: bold; margin-top: 15px;"></p> 
+                <p id="NightResult" style="font-weight: bold; margin-top: 15px;"></p>
+                <p id="DailyResult" style="font-weight: bold; margin-top: 15px;"></p>
+            </div>
+           <div class="btn-container">
+                <button id="TrunOn" type="radio">turn on commission</button>
+                <button id="TrunOff" type="radio">turn off commission</button>
+            </div>
+                
+            <div class="btn-container">
+                <button id="calculateBtn">Calculate</button>
+                <button id="voidBtn" disabled>Void</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+        
+    </div>
+    <div class="features" style="display: flex; flex-direction: column; gap: 40px; padding: 20px;">
+        
+        <!-- Section 1: Add Sales -->
+        <div class="Add-sales">
+            <h1>Add Sales</h1>
+            <p>Enter new sales data here to calculate totals.</p>
+            <div class="add-sales-form">
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="productInput" placeholder="Item name"></td>
+                        <td><input type="number" id="quantityInput" placeholder="0"></td>
+                        <td><input type="number" id="priceInput" placeholder="$0.00"></td>
+                        <td><input type="number" id="totalInput" placeholder="$0.00" ></td>
+                        <td><input type="date" id="dateInput"></td>
+                        <td><button id="addSaleRowBtn">Add to History</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- Section 3: History of Sales -->
+        <div class="History-of-sales">
+            <h1>History of the Sales</h1>
+            <div class="sales-history">
+                <table id="historyTable" style="width: 100%; text-align:center; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid green;">
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Date</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <!-- New rows will be added here by Javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="about">
+        <h2>About</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+    </div>
+    <div class="contact">
+        <h2>Contact</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+    </div>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast"></div>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+/* --- GLOBAL VARIABLES --- */
+:root {
+    --bg: #f8fafc;
+    --surface: rgba(255, 255, 255, 0.86);
+    --surface-strong: rgba(255, 255, 255, 0.95);
+    --text: #0f172a;
+    --heading: #0f172a;
+    --muted: #475569;
+    --border: rgba(15, 23, 42, 0.12);
+    --accent: #10b981;
+    --accent-strong: #059669;
+    --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --header-bg: rgba(248, 250, 252, 0.9);
+    --header-border: rgba(16, 185, 129, 0.2);
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --input-text: #0f172a;
+    --button-text: #0f172a;
+    --button-bg: #10b981;
+    --button-bg-alt: #334155;
+    --button-alt-text: #ffffff;
+    --table-row: rgba(243, 244, 246, 0.9);
+    --table-row-hover: rgba(255, 255, 255, 0.98);
+    --footer-text: #64748b;
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --surface: rgba(15, 23, 42, 0.8);
+    --surface-strong: rgba(30, 41, 59, 0.85);
+    --text: #e2e8f0;
+    --heading: #f8fafc;
+    --muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #10b981;
+    --accent-strong: #059669;
+    --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --header-bg: rgba(15, 23, 42, 0.85);
+    --header-border: rgba(16, 185, 129, 0.3);
+    --input-bg: #0f172a;
+    --input-border: #334155;
+    --input-text: #e2e8f0;
+    --button-text: #0f172a;
+    --button-bg: #10b981;
+    --button-bg-alt: #334155;
+    --button-alt-text: #ffffff;
+    --table-row: rgba(15, 23, 42, 0.5);
+    --table-row-hover: rgba(30, 41, 59, 1);
+    --footer-text: #94a3b8;
+}
+
+/* --- GLOBALS --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3 {
+    color: var(--heading);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* --- HEADER & NAV --- */
+header {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(10px);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--header-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo img {
+    height: 40px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--accent);
+}
+
+button#theme-toggle {
+    background-color: var(--button-bg-alt);
+    color: var(--button-alt-text);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button#theme-toggle:hover {
+    background-color: rgba(51, 65, 85, 0.9);
+    transform: translateY(-1px);
+}
+
+/* --- PANELS & CARDS --- */
+.Calculation, .Add-sales, .Details-of-sales, .History-of-sales, .about, .contact {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1000px;
+    width: 90%;
+    box-shadow: var(--panel-shadow);
+}
+
+.features {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 !important;
+}
+
+.features > div {
+    margin: 0;
+    width: 100%;
+}
+
+/* --- FORM ELEMENTS --- */
+.input-container label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+input[type="number"],
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    color: var(--input-text);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+table input {
+    width: 100%;
+}
+
+/* --- BUTTONS --- */
+.btn-container {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--accent-strong);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+button#resetBtn, button#voidBtn {
+    background-color: var(--button-bg-alt);
+    color: var(--button-alt-text);
+}
+
+button#resetBtn:hover, button#voidBtn:hover {
+    background-color: #475569;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- TABLES --- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 15px;
+}
+
+th {
+    padding: 10px 15px;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--input-border) !important;
+    text-align: left;
+}
+
+td {
+    background-color: var(--table-row);
+    padding: 15px;
+    text-align: left;
+    color: var(--text);
+}
+
+td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+td:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+
+tbody tr {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    transform: scale(1.01);
+    background-color: var(--table-row-hover);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--footer-text);
+    border-top: 1px solid var(--input-border);
+    margin-top: 50px;
+}
+
+/* --- TOAST NOTIFICATION --- */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: var(--accent);
+    color: var(--bg-color);
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    bottom: 30px;
+    right: 30px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s, bottom 0.3s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .add-sales-form, .sales-history {
+        overflow-x: auto;
+    }
+
+    .btn-container {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
