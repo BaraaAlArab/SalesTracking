@@ -5,12 +5,11 @@ document.getElementById("resetBtn").addEventListener("click", function() {
     document.getElementById("morningSales").value = "";
     document.getElementById("nightSales").value = "";
     document.getElementById("dailySales").value = "";
+    //document.getElementById("PaymentDate").dataset.paymentDate = ""; // Clear the payment date data attribute
     document.getElementById("result").textContent = "";
-    document.getElementById("MorningResult").textContent = "";
-    document.getElementById("NightResult").textContent = "";
-    document.getElementById("DailyResult").textContent = "";
     document.getElementById("TrunOn").disabled = false;
     document.getElementById("TrunOff").disabled = false;
+    
 });
 document.getElementById("quantityInput").addEventListener("input", 
     function() {
@@ -93,12 +92,17 @@ function calculateSales() {
         if (totalSales >= dailyTarget) {
             result += 50; // Add a bonus of $50 if the target is met
         }
+        else {
+            showToast("Daily target not met. No bonus added.");
+        }
     }
-
+    
+    
     // Update the result paragraphs
     document.getElementById("MorningResult").textContent = "Morning Sales: " + morningSales + " | Commission (" + commissionRate + "): " + morningComm.toFixed(2);
     document.getElementById("NightResult").textContent = "Night Sales: " + nightSales + " | Commission (" + commissionRate + "): " + nightComm.toFixed(2);
     document.getElementById("DailyResult").textContent = "Total Daily Sales: " + totalSales + " | Total Commission/Bonus: " + result.toFixed(2);
+    document.getElementById("PaymentDate").textContent = "Payment Date: " + new Date().toLocaleDateString(); //Show the payment date in the result section
 }
 
 

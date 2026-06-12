@@ -7,7 +7,9 @@
     <title>SalesTracker</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="theme.css">
-    <script src="./backend/script.js" defer></script>
+    <script src="./backend/Sales_Calculations.js" defer></script>
+    <script src="./backend/HistoryController.js" defer></script>
+    <script src="./backend/Sales_Controllers.js" defer></script>
     <script src="./theme/theme.js" defer></script>
 </head>
 
@@ -37,16 +39,20 @@
                 
                 <label for="dailySales">Daily Sales Target (Optional):</label>
                 <input type="number" id="dailySales" placeholder="Enter daily sales target">
-                <section style="display: flex; gap: 10px; align-items: center;">
-                    <label for="operation">commission:</label>
-                    <select id="Commission">
-                        <option value="10%">10%</option>
-                        <option value="15%">15%</option>
+
+                <label for="dateInput">Date:</label>
+                <input type="date" id="dateInput">
+
+                <label for="Commission">Commission:</label>
+                <select id="Commission">
+                    <option value="10%">10%</option>
+                    <option value="15%">15%</option>
                         <option value="20%">20%</option>
                     </select>
                 <!-- Use a single place for the result -->
                 <p id="MorningResult" style="font-weight: bold; margin-top: 15px;"></p> 
                 <p id="NightResult" style="font-weight: bold; margin-top: 15px;"></p>
+                <p id="PaymentDate" style="font-weight: bold; margin-top: 15px;"></p>
                 <p id="DailyResult" style="font-weight: bold; margin-top: 15px;"></p>
             </div>
            <div class="btn-container">
@@ -58,15 +64,43 @@
                 <button id="calculateBtn">Calculate</button>
                 <button id="voidBtn" disabled>Void</button>
                 <button id="resetBtn">Reset</button>
+                <button id="Add_sales_targets">Add to Sales History</button>
             </div>
         
     </div>
     <div class="features" style="display: flex; flex-direction: column; gap: 40px; padding: 20px;">
         
-        <!-- Section 1: Add Sales -->
-        <div class="Add-sales">
-            <h1>Add Sales</h1>
-            <p>Enter new sales data here to calculate totals.</p>
+        <!-- Section 1: Add Products -->
+        
+        <div class="sales-targets">
+        <h2>Sales Targets</h2>
+        <table style="width: 100%; text-align: left;">
+            <tr>
+                <th>Morning sales</th>
+                <th>Night sales</th>
+                <th>Commission</th>
+                <th>Target sales</th>
+                <th>Total sales</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td id="morningSalesTarget">0</td>
+                <td id="nightSalesTarget">0</td>
+                <td id="commissionTarget">0%</td>
+                <td id="dailySalesTarget">0</td>
+                <td id="TotalSales">0</td>
+                <td id="salesDateTarget">mm/dd/yyyy</td>
+            </tr>
+        </table>
+        <div class="btn-container">
+                <button id="setTargetBtn">Set Sales Target</button>
+                <button id="clearTargetBtn">Clear Sales Target</button>
+
+            </div>
+    </div>
+    <div class="Add-sales">
+            <h1>Add Products</h1>
+            <p>Enter new Product data here to calculate totals.</p>
             <div class="add-sales-form">
                 <table style="width: 100%; text-align: left;">
                     <tr>
@@ -90,7 +124,7 @@
         </div>
         <!-- Section 3: History of Sales -->
         <div class="History-of-sales">
-            <h1>History of the Sales</h1>
+            <h1>History of the Products</h1>
             <div class="sales-history">
                 <table id="historyTable" style="width: 100%; text-align:center; border-collapse: collapse;">
                     <thead>
@@ -107,13 +141,16 @@
                     </tbody>
                 </table>
             </div>
+            <div class="btn-container">
+                <button id="exportBtn">Export to CSV</button>
+                <button id="clearHistoryBtn">Clear History</button>
+                <button id="deleteLastEntryBtn">Delete Last Entry</button>
+
+            </div>
         </div>
 
     </div>
-    <div class="about">
-        <h2>About</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
-    </div>
+    
     <div class="contact">
         <h2>Contact</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
