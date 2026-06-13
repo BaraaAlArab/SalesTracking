@@ -25,6 +25,11 @@ document.getElementById("quantityInput").addEventListener("input", calculateQuan
 document.getElementById("priceInput").addEventListener("input", calculateQuantity);
 // Attach event listener to the "Add to History" button
 document.getElementById("addSaleRowBtn").addEventListener("click", addSaleToHistory);
+document.getElementById("editeBtn").addEventListener("click", openSalesTargetEditor);
+document.getElementById("closeDialogBtn").addEventListener("click", closeEditDialog);
+document.getElementById("editDialog").addEventListener("click", function(event) {
+    if (event.target.id === "editDialog") closeEditDialog();
+});
 
 document.getElementById("voidBtn").addEventListener("click", function() {
     var historyTable = document.getElementById("historyTable");
@@ -115,6 +120,108 @@ function calculateQuantity() {
 
 
 
+function openSalesTargetEditor() {
+    const dialog = document.getElementById("editDialog");
+    const body = document.getElementById("dialogBody");
+    document.getElementById("dialogTitle").textContent = "Edit sales target";
+    body.innerHTML = `
+        <label>Morning sales</label>
+        <input id="editMorning" type="number" value="${document.getElementById("morningSalesTarget").textContent}">
+        <label>Night sales</label>
+        <input id="editNight" type="number" value="${document.getElementById("nightSalesTarget").textContent}">
+        <label>Commission</label>
+        <select id="editCommission">
+            <option value="10%" ${document.getElementById("commissionTarget").textContent === "10%" ? "selected" : ""}>10%</option>
+            <option value="15%" ${document.getElementById("commissionTarget").textContent === "15%" ? "selected" : ""}>15%</option>
+            <option value="20%" ${document.getElementById("commissionTarget").textContent === "20%" ? "selected" : ""}>20%</option>
+        </select>
+        <label>Target sales</label>
+        <input id="editTarget" type="number" value="${document.getElementById("dailySalesTarget").textContent}">
+        <label>Date</label>
+        <input id="editDate" type="date" value="${document.getElementById("salesDateTarget").textContent === "mm/dd/yyyy" ? "" : document.getElementById("salesDateTarget").textContent}">
+        <div class="modal-actions">
+            <button type="button" class="ghost-btn" id="cancelEditBtn">Cancel</button>
+            <button type="button" id="saveEditBtn">Save</button>
+        </div>
+    `;
+    dialog.classList.add("open");
+    dialog.setAttribute("aria-hidden", "false");
+    document.getElementById("cancelEditBtn").addEventListener("click", closeEditDialog);
+    document.getElementById("saveEditBtn").addEventListener("click", saveSalesTargetEdit);
+}
+
+function closeEditDialog() {
+    const dialog = document.getElementById("editDialog");
+    dialog.classList.remove("open");
+    dialog.setAttribute("aria-hidden", "true");
+}
+
+function saveSalesTargetEdit() {
+    const morning = Number(document.getElementById("editMorning").value) || 0;
+    const night = Number(document.getElementById("editNight").value) || 0;
+    const target = Number(document.getElementById("editTarget").value) || 0;
+    const commission = document.getElementById("editCommission").value;
+    const date = document.getElementById("editDate").value || "mm/dd/yyyy";
+
+    document.getElementById("morningSalesTarget").textContent = morning;
+    document.getElementById("nightSalesTarget").textContent = night;
+    document.getElementById("dailySalesTarget").textContent = target;
+    document.getElementById("commissionTarget").textContent = commission;
+    document.getElementById("salesDateTarget").textContent = date;
+    document.getElementById("TotalSales").textContent = morning + night;
+
+    closeEditDialog();
+    showToast("Sales target updated.");
+}
+
+function editHistoryRow(button) {
+    const row = button.closest("tr");
+    const cells = row.cells;
+    const product = cells[0].textContent;
+    const quantity = cells[1].textContent;
+    const price = cells[2].textContent;
+    const total = cells[3].textContent;
+    const date = cells[4].textContent;
+
+    document.getElementById("dialogTitle").textContent = "Edit product entry";
+    document.getElementById("dialogBody").innerHTML = `
+        <label>Product</label>
+        <input id="editProduct" type="text" value="${product}">
+        <label>Quantity</label>
+        <input id="editQuantity" type="number" value="${quantity}">
+        <label>Price</label>
+        <input id="editPrice" type="number" value="${price}">
+        <label>Total</label>
+        <input id="editTotal" type="number" value="${total}">
+        <label>Date</label>
+        <input id="editEntryDate" type="date" value="${date}">
+        <div class="modal-actions">
+            <button type="button" class="ghost-btn" id="cancelEditBtn">Cancel</button>
+            <button type="button" id="saveEntryBtn">Save</button>
+        </div>
+    `;
+
+    document.getElementById("editDialog").classList.add("open");
+    document.getElementById("cancelEditBtn").addEventListener("click", closeEditDialog);
+    document.getElementById("saveEntryBtn").addEventListener("click", function() {
+        cells[0].textContent = document.getElementById("editProduct").value;
+        cells[1].textContent = document.getElementById("editQuantity").value;
+        cells[2].textContent = document.getElementById("editPrice").value;
+        cells[3].textContent = document.getElementById("editTotal").value;
+        cells[4].textContent = document.getElementById("editEntryDate").value || date;
+        closeEditDialog();
+        showToast("Product entry updated.");
+    });
+}
+
+function deleteHistoryRow(button) {
+    const row = button.closest("tr");
+    if (confirm("Delete this product entry?")) {
+        row.remove();
+        showToast("Product entry deleted.");
+    }
+}
+
 function addSaleToHistory() {
     var product = document.getElementById("productInput").value;
     var quantity = document.getElementById("quantityInput").value;
@@ -123,7 +230,7 @@ function addSaleToHistory() {
     var date = document.getElementById("dateInput").value;
 
     if (product && quantity && price && date) {
-        var historyTable = document.getElementById("historyTable");
+        var historyTable = document.getElementById("historyTable").getElementsByTagName('tbody')[0];
         var newRow = historyTable.insertRow(-1);
         
         newRow.insertCell(0).textContent = product;
@@ -131,6 +238,8 @@ function addSaleToHistory() {
         newRow.insertCell(2).textContent = price;
         newRow.insertCell(3).textContent = total;
         newRow.insertCell(4).textContent = date;
+        const actionCell = newRow.insertCell(5);
+        actionCell.innerHTML = '<button type="button" class="inline-action-btn" onclick="editHistoryRow(this)">Edit</button> <button type="button" class="inline-action-btn" onclick="deleteHistoryRow(this)">Delete</button>';
 
         // Clear input fields after adding to history
         document.getElementById("productInput").value = "";

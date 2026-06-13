@@ -93,10 +93,10 @@
             </tr>
         </table>
         <div class="btn-container">
-                <button id="setTargetBtn">Set Sales Target</button>
-                <button id="clearTargetBtn">Clear Sales Target</button>
-
+                <button id="editeBtn" type="button">Edit Sales Target</button>
+                <button id="clearTargetBtn" type="button">Clear Sales Target</button>
             </div>
+        </div>
     </div>
     <div class="Add-sales">
             <h1>Add Products</h1>
@@ -116,7 +116,7 @@
                         <td><input type="number" id="quantityInput" placeholder="0"></td>
                         <td><input type="number" id="priceInput" placeholder="$0.00"></td>
                         <td><input type="number" id="totalInput" placeholder="$0.00" ></td>
-                        <td><input type="date" id="dateInput"></td>
+                        <td><input type="date" id="productDateInput"></td>
                         <td><button id="addSaleRowBtn">Add to History</button></td>
                     </tr>
                 </table>
@@ -133,8 +133,8 @@
                             <th>Quantity</th>
                             <th>Total Price</th>
                             <th>Date</th>
+                            <th>Actions</th>
                         </tr>
-                        
                     </thead>
                     <tbody>
                         <!-- New rows will be added here by Javascript -->
@@ -162,6 +162,16 @@
 
     <!-- Toast Notification Container -->
     <div id="toast" class="toast"></div>
+
+    <div id="editDialog" class="modal-backdrop" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="dialogTitle">Edit record</h3>
+                <button id="closeDialogBtn" class="ghost-btn" type="button" aria-label="Close dialog">×</button>
+            </div>
+            <div id="dialogBody" class="modal-body"></div>
+        </div>
+    </div>
 </body>
 
 </html>

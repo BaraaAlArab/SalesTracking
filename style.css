@@ -210,9 +210,14 @@ button:hover {
     box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
 }
 
-button#resetBtn, button#voidBtn {
+button#resetBtn, button#voidBtn, .ghost-btn {
     background-color: var(--button-bg-alt);
     color: var(--button-alt-text);
+}
+
+.ghost-btn {
+    padding: 8px 12px;
+    border-radius: 999px;
 }
 
 button#resetBtn:hover, button#voidBtn:hover {
@@ -264,6 +269,63 @@ footer {
     color: var(--footer-text);
     border-top: 1px solid var(--input-border);
     margin-top: 50px;
+}
+
+/* --- MODAL DIALOG --- */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    padding: 20px;
+}
+
+.modal-backdrop.open {
+    display: flex;
+}
+
+.modal-card {
+    width: min(520px, 100%);
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--panel-shadow);
+    padding: 18px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.modal-body label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.modal-body input,
+.modal-body select {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.inline-action-btn {
+    padding: 8px 10px;
+    font-size: 14px;
 }
 
 /* --- TOAST NOTIFICATION --- */

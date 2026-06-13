@@ -35,3 +35,31 @@ function showToast(message) {
     }, 3000);
 }
 
+document.getElementById("clearTargetBtn").addEventListener("click", function() {
+    //if confirm("Are you sure you want to clear the sales targets?") 
+    if (confirm("Are you sure you want to clear the sales targets?")) {
+        // Clear the sales targets table
+        document.getElementById("morningSalesTarget").textContent = "0";
+        document.getElementById("nightSalesTarget").textContent = "0";
+        document.getElementById("dailySalesTarget").textContent = "0";
+        document.getElementById("salesDateTarget").textContent = "mm/dd/yyyy";
+        document.getElementById("TotalSales").textContent = "0"; 
+        document.getElementById("commissionTarget").textContent = "0%";
+    }
+    else {
+        // User clicked "Cancel", do nothing
+        return;
+    }
+    // Clear the input fields
+    document.getElementById("morningSales").value = "";
+    document.getElementById("nightSales").value = "";
+    document.getElementById("dailySales").value = "";
+    document.getElementById("dateInput").value = "";
+    document.getElementById("commissionTarget").textContent = "0%";
+    document.getElementById("morningSalesTarget").textContent = "0";
+    document.getElementById("nightSalesTarget").textContent = "0";
+    document.getElementById("dailySalesTarget").textContent = "0";
+    document.getElementById("salesDateTarget").textContent = "mm/dd/yyyy";
+    document.getElementById("TotalSales").textContent = "0"; 
+    
+});
