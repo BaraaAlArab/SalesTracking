@@ -16,7 +16,7 @@ function exportHistoryToCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-};
+}
 function clearHistory() {
     if (confirm("Are you sure you want to clear the history? This action cannot be undone.")) {
         localStorage.removeItem("salesHistory");
