@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HrSystem</title>
+    <link rel="stylesheet" href="../Styles/HrStyle/HrSystem.css">
+    <script src="../../backend/HrController/HrSystem.js" defer></script>
+    <script src="../theme/theme.js" defer></script>
+</head>
+<body>
+    <div id="hr-system-app">
+      <header>
+        <div class="logo">
+            <img src="../assets/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../SalesTracker.html">Home</a></li>
+                <li><a href="./HrSystem.html">HR System</a></li>
+                <li><a href="./Sales Chart/SalesChart.html">Sales Chart</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" type="button" aria-label="Toggle theme">Dark Mode</button>
+      </header>
+
+      <main class="dashboard-shell">
+        <section class="hero-card">
+            <div>
+                <p class="eyebrow">Human Resources</p>
+                <h1>HR Management Dashboard</h1>
+                <p class="hero-copy">Track employees, attendance, and payroll in one elegant workspace designed for fast daily operations.</p>
+            </div>
+            <div class="hero-badges">
+                <span>✅ 24/7 visibility</span>
+                <span>📊 Live summaries</span>
+                <span>🔐 Secure records</span>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-card accent-indigo"><strong>18</strong><span>Active Employees</span></article>
+            <article class="stat-card accent-emerald"><strong>96%</strong><span>Attendance Rate</span></article>
+            <article class="stat-card accent-amber"><strong>$142K</strong><span>Monthly Payroll</span></article>
+        </section>
+
+        <section id="employee-management" class="panel-grid">
+
+                  <div class="employee-form">
+                    <h3>Add New Employee</h3>
+                    <form id="add-employee-form">
+                        <div class="input-group">
+                            <label for="employee-name">Name</label>
+                            <input type="text" id="employee-name" name="employee-name" required placeholder="e.g. John Doe">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="employee-position">Position</label>
+                            <input type="text" id="employee-position" name="employee-position" required placeholder="e.g. Software Engineer">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="employee-department">Department</label>
+                            <input type="text" id="employee-department" name="employee-department" required placeholder="e.g. Engineering">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="employee-salary">Salary</label>
+                            <input type="number" id="employee-salary" name="employee-salary" required placeholder="e.g. 75000">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="employee-start-date">Start Date</label>
+                            <input type="date" id="employee-start-date" name="employee-start-date" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="employee-email">Email</label>
+                            <input type="email" id="employee-email" name="employee-email" placeholder="e.g. john@company.com">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="employee-phone">Phone</label>
+                            <input type="tel" id="employee-phone" name="employee-phone" required placeholder="e.g. +1 234 567 8900">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="employee-address">Address</label>
+                            <input type="text" id="employee-address" name="employee-address" required placeholder="e.g. 123 Main St">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="employee-emergency-contact">Emergency Contact</label>
+                            <input type="text" id="employee-emergency-contact" name="employee-emergency-contact" required placeholder="e.g. Jane Doe (Wife)">
+                        </div>
+  
+                        <div class="input-group">
+                            <label for="status">Marital Status</label>
+                            <div class="select-wrapper">
+                                <select id="status" name="status" required>
+                                    <option value="" disabled selected>Select status...</option>
+                                    <option value="active">Married</option>
+                                    <option value="inactive">Single</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="Submit_Btn">
+                            <span>Add Employee</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </button>
+                    </form>
+                    </div>
+                
+        </section>
+        <section id="employee-list" class="panel-grid">
+                <h2>Employee Management</h2>
+                <!-- Employee management content goes here -->
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employee-table-body">
+                        <!-- Employee data goes here -->
+                    </tbody>
+                </table>
+        </section>
+
+        <section id="attendance-tracking" class="panel-grid">
+                <h2>Attendance Tracking</h2>
+
+                <!-- Attendance tracking content goes here -->
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Employee Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-table-body">
+                        <!-- Attendance data goes here -->
+                    </tbody>
+                </table>
+            </section>
+        <section id="payroll" class="panel-grid">
+                <h2>Payroll</h2>
+                <!-- Payroll content goes here -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Salary</th>
+                                <th>Payment Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payroll-table-body">
+                            <!-- Payroll data goes here -->
+                        </tbody>
+                    </table>
+        </section>
+      </main>
+    </div>
+</body>
+</html>
