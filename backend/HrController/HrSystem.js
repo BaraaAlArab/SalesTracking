@@ -47,3 +47,41 @@ document.getElementById('add-employee-form').addEventListener('submit', function
     // Reset the form after submission
     this.reset();
 });
+
+document.getElementById('Rest_Btn').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('employee-name').value.trim();
+
+    if (!name) {
+        alert('Fill in the employee details you want to deactivate first.');
+        return;
+    }
+
+    const removeMatchingRows = (tbodySelector, columnIndex, targetValue) => {
+        const rows = document.querySelectorAll(`${tbodySelector} tr`);
+        let removedCount = 0;
+
+        for (const row of rows) {
+            const cells = Array.from(row.querySelectorAll('td')).map((cell) => cell.textContent.trim());
+
+            if (cells[columnIndex] === targetValue) {
+                row.remove();
+                removedCount += 1;
+            }
+        }
+
+        return removedCount;
+    };
+
+    const removedFromEmployeeList = removeMatchingRows('#employee-table-body', 0, name);
+    const removedFromAttendance = removeMatchingRows('#attendance-table-body', 1, name);
+    const removedFromPayroll = removeMatchingRows('#payroll-table-body', 0, name);
+
+    if (!removedFromEmployeeList && !removedFromAttendance && !removedFromPayroll) {
+        alert('No employee with that name was found in the tables.');
+        return;
+    }
+
+    document.getElementById('add-employee-form').reset();
+});
